@@ -1,4 +1,4 @@
-DOTA2/Valve MOBA Game
+DOTA/Valve MOBA Game
 LOL/Garena MOBA Game
 Minecraft/Building With Block
 Tetris/Old Tile-Matching Puzzle Game
