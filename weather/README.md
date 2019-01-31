@@ -2,7 +2,7 @@
 
 # Using
 
-<h1>type python3 xml2json yourxmlfile.xml<h1><br>
+type python3 xml2json yourxmlfile.xml<br>
 make sure you type correctly.<br>
 
 #Reference
