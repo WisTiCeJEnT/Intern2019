@@ -1,5 +1,15 @@
 import random ,sys
-file = open('game.txt','r')
+cate=['game','fruit']
+print('Select Category: ')
+print()
+print('1 Game')
+print('2 Fruit')
+print()
+n=int(input('Type: 1 or 2  '))
+
+
+
+file = open(cate[n-1]+'.txt','r')
 dic={}
 for i in file:
     dic[(i.split('/'))[0]]=(i.split('/'))[1].strip('\n')
@@ -8,9 +18,10 @@ score=0
 rem=5
 
 res=['_' for x in range(len(word))]
-
 print()
-print(hint)
+print('###############################')
+print()
+print('Hint: ',hint)
 print()
 print(*res,'      ','score: ',score,'  remaining wrong guess',rem)
 print()
