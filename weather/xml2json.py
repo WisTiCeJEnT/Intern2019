@@ -40,3 +40,55 @@ for i in range(1,len(text)-1):
         stack.append(tmp)
 
 stack=stack[1:len(stack)-1]
+sep=[]
+tmp=[]
+i=0
+while i<len(stack):
+    s=stack[i]
+    
+    t=s[s.find('<')+1:s.find(' ')+1]
+    
+    if (t ==''):
+        
+        end=stack.index('<'+'/'+s.strip('<>')+'>')
+        sep.append(stack[i:end+1])
+        i=end+1
+        continue
+    if (('<'+'/'+t.strip()+'>') in stack):
+        end=stack.index('<'+'/'+t.strip()+'>') 
+        sep.append(stack[i:end+1])
+        i=end+1
+        continue
+    else:
+        sep.append([stack[i]])
+        i+=1
+    
+for i in sep:
+    print(i)
+res={}
+for i in range(len(sep)):
+    get=extract(sep[i][0])
+    if len(get)!=1:
+        k=get[0]
+        v=get[1]
+        n=len(sep[i])
+        for j in range(len(sep[i])-2):
+            inget=extract(((sep[i])[1:n-1])[j])
+            ink=inget[0]
+            inv=inget[1]
+            v[ink]=inv
+        res[k]=v
+    else:
+        k=get[0]
+        v={}
+        n=len(sep[i])
+        for j in range(len(sep[i])-2):
+            inget=extract(((sep[i])[1:n-1])[j])
+            ink=inget[0]
+            inv=inget[1]
+            v[ink]=inv
+        res[k]=v
+
+    
+
+
