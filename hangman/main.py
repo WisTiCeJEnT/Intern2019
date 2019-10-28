@@ -1,55 +1,58 @@
-import random ,sys
-cate=['game','fruit']
-print('Select Category: ')
-print()
-print('1 Game')
-print('2 Fruit')
-print()
-n=int(input('Type: 1 or 2  '))
+import random, sys, os
+cate = ['game', 'fruit']
+WELCOME_TEXT = """
+Select Category: 
 
+1 Game
+2 Fruit
 
+"""
+print(WELCOME_TEXT)
+n = int(input('Type: 1 or 2  '))
 
 file = open(cate[n-1]+'.txt','r')
 dic={}
 for i in file:
-    dic[(i.split('/'))[0]]=(i.split('/'))[1].strip('\n')
-word,hint = random.choice(list(dic.items()))
-score=0
-rem=5
+    dic[(i.split('/'))[0]] = (i.split('/'))[1].strip('\n')
+word, hint = random.choice(list(dic.items()))
+score = 0
+rem = 5
+guess = None
 
-res=['_' for x in range(len(word))]
-print()
-print('###############################')
-print()
-print('Hint: ',hint)
-print()
-print(*res,'      ','score: ',score,'  remaining wrong guess',rem)
-print()
+res = ['_' for x in range(len(word))]
+HINT_TEXT = f"""
+###############################')
+
+Hint: {hint}
+
+"""
 while(True):
-    if ("".join(res))==word:
-        print("Congratulation!!! You win")
-        print()
-        print('score: ',score)
+    os.system('clear')
+    print(HINT_TEXT)
+    print(*res,'      ','score: ',score,'  remaining wrong guess',rem,  f"wrong guessed: {guess}" if guess else "", end = '\n\n')
+    if ("".join(res)) == word:
+        WIN_TEXT = f"""
+        Congratulation!!! You win
+
+        score: {score}
+        """
+        print(WIN_TEXT)
         break
     else:
-        guess=input('Enter alphabet: ')
-        print()
+        guess = input('Enter alphabet: ')
         if (guess.lower() in word.lower()) and (guess.lower() not in ("".join(res)).lower()):
             for i in range(len(word)):
-                if word[i].lower()==guess.lower():
-                    res[i]=word[i]
-                    score+=10
-            print(*res,'      ','score: ',score,'  remaining wrong guess',rem,)
-            print()
+                if word[i].lower() == guess.lower():
+                    res[i] = word[i]
+                    score += 10
         else:
-            rem-=1
-            print(*res,'      ','score: ',score,'  remaining wrong guess',rem,'  wrong guessed: ',guess)
-            print()
-            if rem==0:
-                print(*res,'      ','score: ',score,'  remaining wrong guess',rem,'  wrong guessed: ',guess)
-                print('You lose , better try harder')
-                print()
-                print('Answer: ',word)
-                print()
+            rem -= 1
+            if rem == 0:
+                LOSE_TEXT = f"""
+                You lose , better try harder
+
+                Answer: {word}
+                """
+                print(LOSE_TEXT)
                 break
 sys.exit()                
