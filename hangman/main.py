@@ -17,7 +17,7 @@ for i in file:
 word, hint = random.choice(list(dic.items()))
 score = 0
 rem = 5
-guess = None
+guessed = ""
 
 res = ['_' for x in range(len(word))]
 HINT_TEXT = f"""
@@ -29,7 +29,7 @@ Hint: {hint}
 while(True):
     os.system('clear')
     print(HINT_TEXT)
-    print(*res,'      ','score: ',score,'  remaining wrong guess',rem,  f"wrong guessed: {guess}" if guess else "", end = '\n\n')
+    print(*res,'      ','score: ',score,'  remaining wrong guess',rem,  f"wrong guessed: {guessed}" if guessed != "" else "", end = '\n\n')
     if ("".join(res)) == word:
         WIN_TEXT = f"""
         Congratulation!!! You win
@@ -40,6 +40,7 @@ while(True):
         break
     else:
         guess = input('Enter alphabet: ')
+        guessed += f"{guess} "
         if (guess.lower() in word.lower()) and (guess.lower() not in ("".join(res)).lower()):
             for i in range(len(word)):
                 if word[i].lower() == guess.lower():
